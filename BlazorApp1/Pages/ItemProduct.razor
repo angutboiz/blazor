@@ -1,0 +1,62 @@
+﻿<div class="item">
+    <div class="item-label">
+        <span>Trả góp 0%</span>
+    </div>
+    <div class="item-img">
+        <img src="./img/option-sg/@ImgURL" alt="" />
+        <img src="./img/Hot-Deal/daciet.webp" alt="" />
+    </div>
+    <h3>@NameProduct</h3>
+    <strong class="price">
+        @PriceProduct
+        <small>-@Discount%</small>
+    </strong>
+    <p class="vote-txt"><b>@Vote</b> <i class="fa-solid fa-star text-danger"></i> (@Count)</p>
+</div>
+
+@code{
+    Random random = new Random();
+    int price, subPrice, subPrice2;
+    int discountPercentage;
+    double vote;
+    int count;
+
+    [Parameter]
+    public string? ImgURL { get; set; }
+
+    [Parameter]
+    public string? NameProduct { get; set; }
+
+    [Parameter]
+    public string? PriceProduct
+    {
+        get { return string.Format("{0:N0}.{1}{2}0.000", price,subPrice,subPrice2); }
+        set { /* You can choose to do something here if needed */ }
+    }
+
+    public string? Discount => discountPercentage.ToString();
+
+    [Parameter]
+    public string? Vote
+    {
+        get { return Math.Round(vote,1).ToString(); }
+        set { /* You can choose to do something here if needed */ }
+    }
+
+    [Parameter]
+    public string? Count
+    {
+        get { return count.ToString(); }
+        set { /* You can choose to do something here if needed */ }
+    }
+
+    public ItemProduct()
+    {
+        price = random.Next(3, 28);
+        subPrice = random.Next(1, 9);
+        subPrice2 = random.Next(5, 9);
+        discountPercentage = random.Next(1, 25);
+        vote = 3 + (random.NextDouble() * (4.9-3.5));
+        count = random.Next(1,999);
+    }
+}
